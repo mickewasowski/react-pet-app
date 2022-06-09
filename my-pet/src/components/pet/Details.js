@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/UserContext';
-import {isAuth} from '../../hoc/isAuth';
+import { isAuth } from '../../hoc/isAuth';
 
 import styles from './Details.module.css';
 import * as petService from '../../services/petService';
@@ -11,10 +13,13 @@ import * as userService from '../../services/userService';
 const Details = ({
     match,
 }) => {
-    const {user} = useAuth();
+    const { user } = useAuth();
+    let history = useHistory();
 
     const [pet, setPet] = useState({});
     const [isCreator, setIsCreator] = useState(false);
+    const [owner, setOwner] = useState("");
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     useEffect(() => {
         const petId = match.params.petId;
@@ -22,59 +27,74 @@ const Details = ({
         petService.getOne(petId)
             .then(result => {
                 setPet(result)
-            });
-        
-    }, [match]);
 
-    useEffect(() => {
-        const userId = user.userId;
-
-        userService.getById(userId)
-        .then(res => {
-            var pet = res.myPets.find(function(pet, index) {
-                if (pet._id === match.params.petId) {
-                    return true;
+                if (result.owner === user.userId) {
+                    setOwner(user.fullName);
+                    setIsCreator(true);
                 }
-            })
+                else {
+                    userService.getById(result.owner)
+                        .then(res => { setOwner(res.fullName) })
+                }
+            });
 
-            if (pet !== undefined) {
-                setIsCreator(true);
-            }
-        })
-    }, [match]);
+    }, [match, user]);
 
-   return (
-      <div className="details">
-          
-                <div className={styles.main}>
-                    <div className="left">
-                        <div className="petDetails">
-                            <h1>Pet Name : {pet.petName} </h1>
-                            <h3>Owner : </h3>
-                            <div className="card">
-                                <p>Breed : {pet.breed} </p>
-                                <p>Age : {pet.age} </p>
-                                <p>Type : {pet.type} </p>
-                            </div>
+    const showModal = () => {
+        setIsModalVisible(true);
+    }
 
-                            {
-                                isCreator === true
+    const deleteFromDb = async () => {
+        await petService.deletePet(pet._id);
+
+        history.push('/pets/all');
+    }
+
+    return (
+        <div className={styles.detailsContainer}>
+
+            <div className={styles.main}>
+                <div>
+                    <img className={styles.petImg} src={pet.imageURL} alt="animalPicture" />
+                </div>
+                <div>
+                    <div>
+                        <div className={styles.card}>
+                            <h2>Pet Name : {pet.petName} </h2>
+                            <h3>Owner : {owner}</h3>
+                            <h3>Breed : {pet.breed} </h3>
+                            <h3>Age : {pet.age} </h3>
+                        </div>
+
+                        {
+                            isCreator === true
                                 ?
                                 <div className="buttonsContainer">
                                     <Link to={`/pets/edit/${pet._id}`} className={styles.editBtn}>Edit</Link>
-                                    <Link to={`/pets/delete/${pet._id}`} className={styles.delBtn}>Delete</Link>
+                                    <button className={styles.delBtn} onClick={showModal}>Delete</button>
                                 </div>
                                 : ''
-                            }
-                        </div>
-                    </div>
-                    <div >
-                        <img className={styles.petImg} src={pet.imageURL} alt="animalPicture"/>
+                        }
                     </div>
                 </div>
+            </div>
 
-      </div>
-   );
+            {
+                isModalVisible
+                    ?
+                    <div className={styles.deletePetModal}>
+                        <div className={styles.options}>
+                            <h3>Are you sure you want to delete this pet?</h3>
+                            <button id={styles.confirm} onClick={deleteFromDb}>Yes</button>
+                            <button id={styles.decline} onClick={() => { setIsModalVisible(false) }}>Cancel</button>
+                        </div>
+                    </div>
+                    :
+                    ""
+            }
+
+        </div>
+    );
 }
 
 const EnhancedComponent = isAuth(Details);

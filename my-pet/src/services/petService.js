@@ -42,3 +42,12 @@ export const updatePet = ({ petName, breed, _id }) =>
     })
         .then(res => { return res.json() })
         .catch(err => { console.log(err) });
+
+export const deletePet = (petId) =>
+    fetch(`${baseURL}/pets/${petId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => { console.log(res) })
