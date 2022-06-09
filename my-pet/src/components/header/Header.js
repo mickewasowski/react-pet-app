@@ -12,8 +12,6 @@ function Header() {
         setIsActive(!isActive);
     }
 
-    let activeStyles = { backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '3px' };
-
     return (
         <header>
             <div className={styles.brandName}><h2>MY PETS</h2></div>
@@ -35,16 +33,16 @@ function Header() {
                     {
                         user.userId !== ''
                             ? <>
-                                <li><NavLink activeStyle={activeStyles} to="/pets/myPets">MY PETS</NavLink></li>
-                                <li><NavLink activeStyle={activeStyles} to="/pets/all">ALL PETS</NavLink></li>
-                                <li><NavLink activeStyle={activeStyles} to="/pets/create">CREATE</NavLink></li>
-                                <li><NavLink activeStyle={activeStyles} to="/user/myprofile">MY PROFILE</NavLink></li>
-                                <li><NavLink activeStyle={activeStyles} to="/user/logout">LOGOUT</NavLink></li>
+                                <li><NavLink to="/pets/myPets">MY PETS</NavLink></li>
+                                <li><NavLink to="/pets/all">ALL PETS</NavLink></li>
+                                <li><NavLink to="/pets/create">CREATE</NavLink></li>
+                                <li><NavLink to="/user/myprofile">MY PROFILE</NavLink></li>
+                                <li><NavLink to="/user/logout">LOGOUT</NavLink></li>
                             </>
                             :
                             <>
-                                <li><NavLink activeStyle={activeStyles} to="/user/register">REGISTER</NavLink></li>
-                                <li><NavLink activeStyle={activeStyles} to="/user/login">LOGIN</NavLink></li>
+                                <li><NavLink to="/user/register">REGISTER</NavLink></li>
+                                <li><NavLink to="/user/login">LOGIN</NavLink></li>
                             </>
                     }
                 </ul>
