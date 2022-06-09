@@ -1,6 +1,6 @@
 import styles from './AllPets.module.css';
 
-import {isAuth} from '../../hoc/isAuth';
+import { isAuth } from '../../hoc/isAuth';
 
 import { useState, useEffect } from 'react';
 
@@ -9,12 +9,12 @@ import * as petService from '../../services/petService';
 import './partials/PetPartial';
 import PetPartial from './partials/PetPartial';
 
-function AllPets(){
+function AllPets() {
 
    const [pets, setPets] = useState([]);
 
    useEffect(() => {
-      async function fetch(){
+      async function fetch() {
          let result = await petService.getAll();
 
          setPets(result);
@@ -23,27 +23,27 @@ function AllPets(){
       fetch();
    }, []);
 
-   return(
-      <div >
+   return (
+      <div className={styles.allPetsPage}>
          <h3>ALL PETS</h3>
 
          <div className={styles.allPetsContainer}>
-            
+
             {
-               pets.length > 0 
-               ? pets.map(x => 
-                  
-                  <PetPartial 
-                     key={x._id}
-                     pet={x}
-                  />
+               pets.length > 0
+                  ? pets.map(x =>
+
+                     <PetPartial
+                        key={x._id}
+                        pet={x}
+                     />
                   )
                   : <p>No pets found yet.</p>
             }
 
          </div>
-                  
-         
+
+
       </div>
    );
 }
