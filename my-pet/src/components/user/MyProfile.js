@@ -1,13 +1,13 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/UserContext';
-import {isAuth} from '../../hoc/isAuth';
+import { isAuth } from '../../hoc/isAuth';
 
 import * as userService from '../../services/userService';
 
 import styles from './MyProfile.module.css';
 
-function MyProfile(){
-   const {user} = useAuth();
+function MyProfile() {
+   const { user } = useAuth();
 
    const [userInfo, setUserInfo] = useState({});
    const [pets, setPets] = useState({});
@@ -21,12 +21,14 @@ function MyProfile(){
    }, [user]);
 
    return (
-      <div className={styles.myProfile}>
-         <img src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
-            alt="avatar" width="200px" height="200px" />
-         <h3>Username: {userInfo.username}</h3>
-         <h4>Full name: {userInfo.fullName}</h4>
-         <p>Pets owned: {pets.length}</p>
+      <div className={styles.myProfilePage}>
+         <div className={styles.myProfile}>
+            <img src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+               alt="avatar" width="200px" height="200px" />
+            <h3>Username: {userInfo.username}</h3>
+            <h3>Full name: {userInfo.fullName}</h3>
+            <h3>Pets owned: {pets.length}</h3>
+         </div>
       </div>
    )
 }
