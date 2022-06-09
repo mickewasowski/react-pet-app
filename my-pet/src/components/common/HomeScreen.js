@@ -25,7 +25,7 @@ const HomeScreen = () => {
             <h2 style={{ margin: 0 }}>Welcome to the pet app!</h2>
             <p>Here you can add your pet's details and share them with everyone!</p>
             {
-               !user
+               user.username === ""
                   ?
                   <p>You can <NavLink to={"user/register"}>SignUp</NavLink> and start sharing or you can <NavLink to={"user/login"}>SignIn</NavLink> if you already have an account!</p>
                   :
