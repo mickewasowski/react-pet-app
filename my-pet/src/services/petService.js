@@ -28,3 +28,17 @@ export const createPet = ({ petName, breed, age, type, imageURL }, userId) =>
 
 export const getTopThreeAdded = () => fetch(`${baseURL}`)
     .then(res => res.json());
+
+export const updatePet = ({ petName, breed, _id }) =>
+    fetch(`${baseURL}/pets/${_id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            petName,
+            breed,
+        })
+    })
+        .then(res => { return res.json() })
+        .catch(err => { console.log(err) });
