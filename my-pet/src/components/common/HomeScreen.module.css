@@ -1,0 +1,5 @@
+.topPetsAdded{
+   display: flex;
+   justify-content: space-around;
+   flex-flow: wrap;
+}

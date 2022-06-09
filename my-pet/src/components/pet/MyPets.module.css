@@ -1,0 +1,9 @@
+.formHeadings{
+   text-align: center;
+}
+
+.myPets{
+   display: flex;
+   justify-content: space-around;
+   flex-flow: wrap;
+}
