@@ -1,4 +1,19 @@
-.topPetsAdded{
+.homeContainer {
+   position: relative;
+   top: 5.4%;
+   width: 100%;
+   height: 100%;
+   background-image: url('../../assets/home-background.jpg');
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+
+   display: flex;
+   justify-content: space-around;
+   flex-direction: column;
+}
+
+.topPetsAdded {
    display: flex;
    justify-content: space-around;
    flex-flow: wrap;
