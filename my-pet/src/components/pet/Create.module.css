@@ -1,38 +1,68 @@
-.createPetForm{
-   background-color: #FB9D3B;
+.addPetContainer {
+   position: relative;
+   top: 4.2%;
+   width: 100%;
+   height: 100%;
+   background-image: url('../../assets/add-pet-background.jpg');
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
+.createPetForm {
+   position: relative;
+   top: 5%;
+   background-color: #55a7cdb3;
    border-radius: 10px;
-   width: 400px;
-   height: 470px;
+   width: 420px;
+   height: 700px;
    margin: auto;
    margin-top: 20px;
    margin-bottom: 20px;
-   box-shadow: rgba(5, 5, 5, 0.925) 0px 7px 29px 0px;
- }
- 
- form div{
-    padding: 10px;
- }
- 
- input[type=text],
- input[type=password],
- input[type=number]{
-    width: 100%;
- }
- 
- button[type=submit]{
-    border:none;
-    border-radius: 4px;
-    background-color: #2E4396;
-    color: white;
-    width: 90px;
-    height: 30px;
- }
- 
- .btnContainer{
-    text-align: center;
- }
- 
- .formHeadings{
-    text-align: center;
- }
- 
+   box-shadow: rgba(5, 5, 5, 0.532) 0px 7px 29px 0px;
+}
+
+form div {
+   padding: 10px;
+}
+
+form p {
+   margin: 0;
+   margin-top: 10px;
+   color: yellow;
+}
+
+input[type=text],
+input[type=password],
+input[type=number] {
+   width: 100%;
+}
+
+.typeDropdown {
+   width: 100%;
+   height: 2rem;
+   margin-top: 5px;
+   border: none;
+   border-radius: 5px;
+}
+
+.typeDropdown:focus {
+   outline: none;
+}
+
+button[type=submit] {
+   border: none;
+   border-radius: 4px;
+   background-color: #8dc5ddab;
+   color: white;
+   width: 90px;
+   height: 30px;
+}
+
+.btnContainer {
+   text-align: center;
+}
+
+.formHeadings {
+   text-align: center;
+}
